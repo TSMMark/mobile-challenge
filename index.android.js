@@ -12,6 +12,9 @@ import {
   View
 } from 'react-native';
 
+import Swipe from './components/Swipe';
+import { yellow } from './constants/Color';
+
 export default class AwesomeProject extends Component {
   render() {
     return (
@@ -28,7 +31,7 @@ const styles = StyleSheet.create({
     flex: 1,
     justifyContent: 'center',
     alignItems: 'center',
-    backgroundColor: '#F5FCFF',
+    backgroundColor: yellow
   }
 
 });

@@ -9,6 +9,8 @@ import {
 
 import SwipeCards from 'react-native-swipe-cards';
 
+import { yellow } from '../constants/Color';
+
 class Card extends Component {
   render() {
     console.log(this.props);
@@ -17,16 +19,6 @@ class Card extends Component {
       <View style={styles.card}>
         <Image style={styles.thumbnail} source={{uri: this.props.image}} />
         <Text style={styles.text}>{this.props.upvotes} Upvote{this.props.upvotes === 1 ? "" : "s"}</Text>
-      </View>
-    )
-  }
-}
-
-class NoMoreCards extends Component {
-  render() {
-    return (
-      <View style={styles.noMoreCards}>
-        <Text>No more cards</Text>
       </View>
     )
   }
@@ -44,7 +36,7 @@ const Cards = [
   {upvotes: 0, image: 'https://media.giphy.com/media/3oEduJbDtIuA2VrtS0/giphy.gif'},
 ]
 
-export default class Swip extends Component {
+export default class Swipe extends Component {
 
   constructor(props) {
     super(props);
@@ -64,11 +56,11 @@ export default class Swip extends Component {
   render() {
     return (
       <SwipeCards
+        containerStyle={styles.container}
         cards={this.state.cards}
         loop={true}
 
         renderCard={(cardData) => <Card {...cardData} />}
-        renderNoMoreCards={() => <NoMoreCards />}
         showYup={true}
         showNope={true}
 
@@ -80,6 +72,13 @@ export default class Swip extends Component {
 }
 
 const styles = StyleSheet.create({
+
+  container: {
+    flex: 1,
+    justifyContent: 'center',
+    alignItems: 'center',
+    backgroundColor: yellow,
+  },
 
   card: {
     alignItems: 'center',
@@ -101,12 +100,6 @@ const styles = StyleSheet.create({
     fontSize: 20,
     paddingTop: 10,
     paddingBottom: 10
-  },
-
-  noMoreCards: {
-    flex: 1,
-    justifyContent: 'center',
-    alignItems: 'center'
   }
 
 })
