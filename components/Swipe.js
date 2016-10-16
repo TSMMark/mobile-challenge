@@ -11,37 +11,38 @@ import SwipeCards from 'react-native-swipe-cards';
 
 import { yellow } from '../constants/Color';
 
+import giphy from '../lib/giphy';
+import { getMobileImageUri } from '../lib/giphy/util';
+
 class Card extends Component {
   render() {
-    console.log(this.props);
-
     return (
       <View style={styles.card}>
-        <Image style={styles.thumbnail} source={{uri: this.props.image}} />
-        <Text style={styles.text}>{this.props.upvotes} Upvote{this.props.upvotes === 1 ? "" : "s"}</Text>
+        <Image style={styles.thumbnail} source={{uri: getMobileImageUri(this.props)}} />
       </View>
     )
   }
 }
 
-const Cards = [
-  {upvotes: 0, image: 'https://media.giphy.com/media/GfXFVHUzjlbOg/giphy.gif'},
-  {upvotes: 0, image: 'https://media.giphy.com/media/irTuv1L1T34TC/giphy.gif'},
-  {upvotes: 0, image: 'https://media.giphy.com/media/LkLL0HJerdXMI/giphy.gif'},
-  {upvotes: 0, image: 'https://media.giphy.com/media/fFBmUMzFL5zRS/giphy.gif'},
-  {upvotes: 0, image: 'https://media.giphy.com/media/oDLDbBgf0dkis/giphy.gif'},
-  {upvotes: 0, image: 'https://media.giphy.com/media/7r4g8V2UkBUcw/giphy.gif'},
-  {upvotes: 0, image: 'https://media.giphy.com/media/K6Q7ZCdLy8pCE/giphy.gif'},
-  {upvotes: 0, image: 'https://media.giphy.com/media/hEwST9KM0UGti/giphy.gif'},
-  {upvotes: 0, image: 'https://media.giphy.com/media/3oEduJbDtIuA2VrtS0/giphy.gif'},
-]
-
 export default class Swipe extends Component {
 
   constructor(props) {
     super(props);
+
+    giphy('pokemon')
+      .then((response) => {
+        this.setState({
+          cards: response,
+          isLoading: false
+        })
+      })
+      .catch((error) => {
+        console.log("ERRPOR", error);
+      });
+
     this.state = {
-      cards: Cards
+      cards: [],
+      isLoading: true
     };
   }
 
@@ -54,6 +55,8 @@ export default class Swipe extends Component {
   }
 
   render() {
+    if (this.state.isLoading) return <Text>"Loading..."</Text>;
+
     return (
       <SwipeCards
         containerStyle={styles.container}
