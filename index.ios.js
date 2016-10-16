@@ -9,31 +9,25 @@ import {
   AppRegistry,
   StyleSheet,
   Text,
-  View
+  View,
+  NavigatorIOS
 } from 'react-native';
 
-import Swipe from './components/Swipe';
-import { yellow } from './constants/Color';
+import ChooseKeyword from './routes/ChooseKeyword';
 
 export default class AwesomeProject extends Component {
+
   render() {
     return (
-      <View style={styles.container}>
-        <Swipe/>
-      </View>
+      <NavigatorIOS
+        initialRoute={{
+          component: ChooseKeyword,
+          title: 'Trending'
+        }}
+        style={{flex: 1}}
+      />
     );
   }
 }
-
-const styles = StyleSheet.create({
-
-  container: {
-    flex: 1,
-    justifyContent: 'center',
-    alignItems: 'center',
-    backgroundColor: yellow
-  }
-
-});
 
 AppRegistry.registerComponent('AwesomeProject', () => AwesomeProject);

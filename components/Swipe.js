@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React, { Component, PropTypes } from 'react';
 import {
   AppRegistry,
   StyleSheet,
@@ -15,6 +15,7 @@ import giphy from '../lib/giphy';
 import { getMobileImageUri } from '../lib/giphy/util';
 
 class Card extends Component {
+
   render() {
     return (
       <View style={styles.card}>
@@ -22,14 +23,19 @@ class Card extends Component {
       </View>
     )
   }
+
 }
 
 export default class Swipe extends Component {
 
+  static propTypes = {
+    keyword: PropTypes.string.isRequired
+  }
+
   constructor(props) {
     super(props);
 
-    giphy('pokemon')
+    giphy(this.props.keyword)
       .then((response) => {
         this.setState({
           cards: response,
@@ -72,6 +78,7 @@ export default class Swipe extends Component {
       />
     )
   }
+
 }
 
 const styles = StyleSheet.create({
