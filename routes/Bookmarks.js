@@ -10,18 +10,18 @@ import {
 import SwipeGifs from '../routes/SwipeGifs';
 
 const trending = [
-  'Pokemon',
-  'Pugs',
-  'Kawaii',
-  'Kitten',
-  'Trump',
-  'Meme',
-  'Trippy',
-  'Arrested Development',
-  'Kitten'
+  'Bookmark 1',
+  'Bookmark 2',
+  'Bookmark 3',
+  'Bookmark 4',
+  'Bookmark 5',
+  'Bookmark 6',
+  'Bookmark 7',
+  'Bookmark 8',
+  'Bookmark 9'
 ];
 
-export default class ChooseKeyword extends Component {
+export default class Bookmarks extends Component {
 
   static propTypes = {
     navigator: PropTypes.object.isRequired
